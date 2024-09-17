@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from app.resources import myresource  # Import your routes here
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
+import whisper
 
 load_dotenv()
 
@@ -23,6 +23,8 @@ app.add_middleware(
 app.include_router(myresource.router)
 
 
-# if __name__ == "__main__":
-#    pass
 
+model = whisper.load_model("base")
+result = model.transcribe(r"D:\Dev\workspace\fastfade-ai\audio.mp3")
+
+print(result["text"])
