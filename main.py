@@ -1,6 +1,10 @@
 from fastapi import FastAPI
 from app.resources import myresource  # Import your routes here
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+
+load_dotenv()
 
 app = FastAPI()
 origins = [
@@ -19,7 +23,6 @@ app.add_middleware(
 app.include_router(myresource.router)
 
 
-if __name__ == "__main__":
-    import uvicorn
-    port = int(os.getenv("PORT", 10000))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+# if __name__ == "__main__":
+#    pass
+

@@ -11,6 +11,9 @@ conda activate fastfade-ai
 
 pip install 
 
-uvicorn main:app --reload
+fastapi dev --port 8999 --host 0.0.0.0
+
+# Prod ( e.g render )
+fastapi run --port 10000 --host 0.0.0.0
 
 ````
