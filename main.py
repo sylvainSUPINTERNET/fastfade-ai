@@ -23,7 +23,7 @@ app.add_middleware(
 app.include_router(myresource.router)
 
 
-model = whisper.load_model("base")
+model = whisper.load_model("medium")
 # Initialize the whisper library with the French language , default is optimized for English
 result = model.transcribe(r"D:\Dev\workspace\fastfade-ai\audio.mp3", language="fr")
 
