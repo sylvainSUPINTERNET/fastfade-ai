@@ -13,6 +13,10 @@ brew install ffmpeg
 
 ````
 
+
+## FASTAPI - Run
+
+
 ```` bash 
 
 conda create -n fastfade-ai python=3.12
@@ -28,3 +32,8 @@ fastapi run --port 10000 --host 0.0.0.0
 
 
 ````
+
+
+## Fine-Tuning
+
+https://github.com/openai/whisper
