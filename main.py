@@ -2,8 +2,7 @@ from fastapi import FastAPI
 from app.resources import myresource  # Import your routes here
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
-import whisper
-from transformers import pipeline
+from dependency_injector import containers, providers
 
 load_dotenv()
 
@@ -21,36 +20,31 @@ app.add_middleware(
 )
 
 # Register your routes
-app.include_router(myresource.router)  
+app.include_router(myresource.router)
 
 
-model = whisper.load_model("medium")
-# Initialize the whisper library with the French language , default is optimized for English
-result = model.transcribe(r"D:\Dev\workspace\fastfade-ai\audio.mp3", language="fr")
 
-print(result["text"])
+# from transformers import pipeline
+
+# import whisper
+
+# model = whisper.load_model("medium")
+# # Initialize the whisper library with the French language , default is optimized for English
+# whisper_result = model.transcribe(r"D:\Dev\workspace\fastfade-ai\audio.mp3", language="fr")
+
+# print(type(whisper_result["text"]))
+
+# # eng_trans = translator.translate(whisper_result["text"], dest='en')
 
 
-analyzer = pipeline(
-    task='text-classification',
-    model="cmarkea/distilcamembert-base-sentiment",
-    tokenizer="cmarkea/distilcamembert-base-sentiment"
-)
-result = analyzer(
-    "J'aime me promener en forêt même si ça me donne mal aux pieds.",
-    return_all_scores=True
-)
+# # classifier = pipeline(
+# #     "text-classification",
+# #     model="j-hartmann/emotion-english-distilroberta-base",
+# #     # model="arpanghoshal/EmoRoBERTa",
+# #     return_all_scores=True,
+# #     function_to_apply='sigmoid'
+# # )
 
-print(result)
+# # results = classifier(eng_trans)
 
-# classifier = pipeline(
-#     "text-classification",
-#     # model="j-hartmann/emotion-english-multilingual-roberta-base",
-#     model="arpanghoshal/EmoRoBERTa",
-#     return_all_scores=True,
-#     function_to_apply='sigmoid'
-# )
-# text = "I'm feeling so happy and excited today!"
-# results = classifier(text)
-# for result in results[0]:
-#     print(f"Émotion: {result['label']}, Score: {result['score']:.4f}")
+# # print(results)
