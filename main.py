@@ -1,12 +1,18 @@
 from fastapi import FastAPI
-from app.resources import myresource  # Import your routes here
+from app.di_container import DIContainer
+from app.resources import ai_resource 
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
-from dependency_injector import containers, providers
 
 load_dotenv()
 
+container = DIContainer()
+container.config.whisper_model_name.from_env("WHISPER_MODEL_NAME", as_=str, default="medium") # required=True)
+# Here you need add module where you neeed @inject decorator to inject dependencies
+container.wire(modules=[ai_resource,])
+
 app = FastAPI()
+app.container = container
 origins = [
     "*",  # Allows requests from any origin (use with caution in production)
 ]
@@ -20,7 +26,7 @@ app.add_middleware(
 )
 
 # Register your routes
-app.include_router(myresource.router)
+app.include_router(ai_resource.router)
 
 
 
