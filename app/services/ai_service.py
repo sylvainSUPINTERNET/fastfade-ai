@@ -7,12 +7,12 @@ class AiService():
         self.openai_model_loader = openai_model_loader
 
     def transcribe(self, audio_path: str, language: str) -> str:
-        model = self.openai_model_loader.whisper
+        # model = self.openai_model_loader.whisper
 
-        model.load_audio()
+        # model.load_audio()
 
-        mel = whisper.log_mel_spectrogram(audio).to(model.device)
-        _, probs = model.detect_language(mel)
+        # mel = whisper.log_mel_spectrogram(audio).to(model.device)
+        # _, probs = model.detect_language(mel)
 
         whisper_result = self.openai_model_loader.whisper.transcribe(audio_path, language=language)
 

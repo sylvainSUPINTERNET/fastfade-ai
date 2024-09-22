@@ -22,7 +22,34 @@
 
 
 import whisper
+from transformers import pipeline
+import nltk
+nltk.download('stopwords')
+
+from nltk.tokenize import TextTilingTokenizer
+
+
+emotions_pipeline = pipeline("text-classification",model='bhadresh-savani/distilbert-base-uncased-emotion', return_all_scores=True)
+
 
 model = whisper.load_model("medium")
 result = model.transcribe("audio2.mp3")
-print(result["text"])
+
+for segment in result["segments"]:
+    print(segment["start"])
+    print(segment["end"])
+    print(segment["text"])
+    print(emotions_pipeline (["text"]))
+    print(" ")
+# print(result["text"])
+
+
+# Instancier un tokenizer TextTiling
+tt = TextTilingTokenizer()
+
+# Découper en segments thématiques
+segments = tt.tokenize(result["text"])
+
+# Afficher les segments thématiques
+for segment in segments:
+    print(segment)
