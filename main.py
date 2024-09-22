@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(threadName)s - %(levelname)s - %(message)s')
 
 container = DIContainer()
 container.config.whisper_model_name.from_env("WHISPER_MODEL_NAME", as_=str, default="medium") # required=True)

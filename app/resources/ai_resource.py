@@ -16,7 +16,6 @@ async def whisper_transcribe(
         upload_service:UploadService = Depends(Provide[DIContainer.upload_service])
     ):
     
-
     upload_service.process_file(file)
     
     # text_result = ai_service.transcribe(r"D:\Dev\workspace\fastfade-ai\audio.mp3", "fr")

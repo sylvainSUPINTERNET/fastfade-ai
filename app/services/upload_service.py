@@ -11,7 +11,7 @@ class UploadService():
 
     def process_file(self, media:UploadFile):
         logging.info(f"Processing file ... {media}")
-
+        
         # bucket = storage.bucket() # storage bucket
         # blob = bucket.blob("audio.mp3")
         # blob.upload_from_filename(r"D:\Dev\workspace\fastfade-ai\audio.mp3", content_type="audio/mp3")
